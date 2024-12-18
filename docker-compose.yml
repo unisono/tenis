@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  slim-app:
+    build: .
+    container_name: slim-app
+    ports:
+      - "8078:80" # Cambiamos el puerto al 8081 en el host
+    volumes:
+      - .:/var/www/html
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: slim-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tenis_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
