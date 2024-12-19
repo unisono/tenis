@@ -15,6 +15,7 @@ use App\Domain\Reservation\GetPendingReservationsService;
 
 
 
+
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         LoggerInterface::class => function (ContainerInterface $c) {
@@ -52,6 +53,7 @@ return function (ContainerBuilder $containerBuilder) {
         ReservationService::class => function (ContainerInterface $c) {
             return new ReservationService($c->get(ReservationRepository::class));
         },
+
         GetPendingReservationsRepository::class => function (ContainerInterface $c) {
             return new GetPendingReservationsRepository($c->get(PDO::class));
         },
